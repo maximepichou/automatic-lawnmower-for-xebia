@@ -1,4 +1,11 @@
-package fr.maxime.lawnmower;
+package fr.maxime.lawnmower.motioncontrol;
+
+import fr.maxime.lawnmower.*;
+import fr.maxime.lawnmower.motioncontrol.calculator.MotionControlCalculator;
+import fr.maxime.lawnmower.motioncontrol.calculator.OrientationCalculator;
+import fr.maxime.lawnmower.motioncontrol.calculator.PositionCalculator;
+import fr.maxime.lawnmower.motioncontrol.motion.Movement;
+import fr.maxime.lawnmower.motioncontrol.motion.Rotation;
 
 import java.util.function.Consumer;
 
@@ -8,9 +15,8 @@ public class MotionController {
 
     private MotionController(){}
 
-    public MotionController(MotionControl motionControl, MotionControlCalculator motionControlCalculator) {
-        this.motionControl = motionControl;
-        this.motionControlCalculator = motionControlCalculator;
+    public static MotionController.Builder builder(){
+        return new MotionController.Builder();
     }
 
     public MotionControl getMotionControl() {
@@ -19,6 +25,33 @@ public class MotionController {
 
     public MotionControlCalculator getMotionControlCalculator() {
         return motionControlCalculator;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        MotionController that = (MotionController) o;
+
+        if (motionControl != null ? !motionControl.equals(that.motionControl) : that.motionControl != null)
+            return false;
+        return motionControlCalculator != null ? motionControlCalculator.equals(that.motionControlCalculator) : that.motionControlCalculator == null;
+    }
+
+    @Override
+    public int hashCode() {
+        int result = motionControl != null ? motionControl.hashCode() : 0;
+        result = 31 * result + (motionControlCalculator != null ? motionControlCalculator.hashCode() : 0);
+        return result;
+    }
+
+    @Override
+    public String toString() {
+        return "MotionController{" +
+                "motionControl=" + motionControl +
+                ", motionControlCalculator=" + motionControlCalculator +
+                '}';
     }
 
     public static final class Builder{

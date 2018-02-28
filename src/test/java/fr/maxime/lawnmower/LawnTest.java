@@ -1,6 +1,11 @@
 package fr.maxime.lawnmower;
 
 
+import fr.maxime.lawnmower.motioncontrol.*;
+import fr.maxime.lawnmower.motioncontrol.motion.Movement;
+import fr.maxime.lawnmower.motioncontrol.motion.Orientation;
+import fr.maxime.lawnmower.motioncontrol.motion.Position;
+import fr.maxime.lawnmower.motioncontrol.motion.Rotation;
 import org.junit.Test;
 
 import java.util.ArrayList;
@@ -118,6 +123,8 @@ public class LawnTest {
 
         assertEquals(expectedManeuverList, maneuverList);
     }
+
+
 
 }
 

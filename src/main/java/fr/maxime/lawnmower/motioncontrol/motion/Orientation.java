@@ -1,4 +1,4 @@
-package fr.maxime.lawnmower;
+package fr.maxime.lawnmower.motioncontrol.motion;
 
 import java.util.Arrays;
 

@@ -1,5 +1,10 @@
 package fr.maxime.lawnmower;
 
+import fr.maxime.lawnmower.motioncontrol.Maneuver;
+import fr.maxime.lawnmower.motioncontrol.MotionController;
+import fr.maxime.lawnmower.motioncontrol.motion.Orientation;
+import fr.maxime.lawnmower.motioncontrol.motion.Position;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.function.Consumer;
@@ -13,10 +18,8 @@ public class ControllableMower {
         motionControls = new ArrayList<>();
     }
 
-    public ControllableMower(Position initialPosition, Orientation initialOrientation, List<MotionController> motionControls) {
-        this.initialPosition = initialPosition;
-        this.initialOrientation = initialOrientation;
-        this.motionControls = motionControls;
+    public static ControllableMower.Builder builder(){
+        return new ControllableMower.Builder();
     }
 
     public Maneuver performMotionControls(Lawn lawn){
@@ -27,9 +30,6 @@ public class ControllableMower {
             if(lawn.isValidManeuver(maneuverToUpdate)){
                 currentOrientation = maneuverToUpdate.getOrientation();
                 currentPosition = maneuverToUpdate.getPosition();
-            }
-            else{
-                System.out.println("can't go into x = " + maneuverToUpdate.getPosition().getX() + " and y = " + maneuverToUpdate.getPosition().getY());
             }
         }
         return new Maneuver(currentPosition, currentOrientation);
@@ -45,6 +45,27 @@ public class ControllableMower {
 
     public List<MotionController> getMotionControls() {
         return motionControls;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        ControllableMower that = (ControllableMower) o;
+
+        if (initialPosition != null ? !initialPosition.equals(that.initialPosition) : that.initialPosition != null)
+            return false;
+        if (initialOrientation != that.initialOrientation) return false;
+        return motionControls != null ? motionControls.equals(that.motionControls) : that.motionControls == null;
+    }
+
+    @Override
+    public int hashCode() {
+        int result = initialPosition != null ? initialPosition.hashCode() : 0;
+        result = 31 * result + (initialOrientation != null ? initialOrientation.hashCode() : 0);
+        result = 31 * result + (motionControls != null ? motionControls.hashCode() : 0);
+        return result;
     }
 
     @Override
@@ -82,6 +103,11 @@ public class ControllableMower {
         public MotionController.Builder withMotionController(){
             Consumer<MotionController> f = obj -> managedInstance.motionControls.add(obj);
             return new MotionController.Builder(this, f);
+        }
+
+        public ControllableMower.Builder withMotionControllerList(List<MotionController> motionControllerList){
+            managedInstance.motionControls = motionControllerList;
+            return this;
         }
 
         public Lawn.Builder done(){

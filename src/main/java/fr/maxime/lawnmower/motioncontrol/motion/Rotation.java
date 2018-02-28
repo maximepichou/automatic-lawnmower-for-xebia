@@ -1,6 +1,8 @@
-package fr.maxime.lawnmower;
+package fr.maxime.lawnmower.motioncontrol.motion;
 
-public enum Rotation implements MotionControl{
+import fr.maxime.lawnmower.motioncontrol.MotionControl;
+
+public enum Rotation implements MotionControl {
     G(-1),
     D(1);
 

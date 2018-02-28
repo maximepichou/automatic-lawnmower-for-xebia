@@ -1,18 +1,19 @@
-package fr.maxime.lawnmower;
+package fr.maxime.lawnmower.motioncontrol.calculator;
 
-public class PositionCalculator implements MotionControlCalculator{
+import fr.maxime.lawnmower.motioncontrol.*;
+import fr.maxime.lawnmower.motioncontrol.motion.Movement;
+import fr.maxime.lawnmower.motioncontrol.motion.Orientation;
+import fr.maxime.lawnmower.motioncontrol.motion.Position;
+
+public class PositionCalculator implements MotionControlCalculator {
 
     private static PositionCalculator instance = null;
 
     private PositionCalculator(){}
 
-    public static PositionCalculator getInstance(){
+    public static synchronized PositionCalculator getInstance(){
         if(instance == null){
-            synchronized (PositionCalculator.class){
-                if(instance == null){
-                    instance = new PositionCalculator();
-                }
-            }
+            instance = new PositionCalculator();
         }
         return instance;
     }

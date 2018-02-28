@@ -1,4 +1,6 @@
-package fr.maxime.lawnmower;
+package fr.maxime.lawnmower.motioncontrol.motion;
+
+import fr.maxime.lawnmower.motioncontrol.MotionControl;
 
 public enum Movement implements MotionControl {
 

@@ -1,4 +1,7 @@
-package fr.maxime.lawnmower;
+package fr.maxime.lawnmower.motioncontrol;
+
+import fr.maxime.lawnmower.motioncontrol.motion.Orientation;
+import fr.maxime.lawnmower.motioncontrol.motion.Position;
 
 public class Maneuver {
     private Position position;
@@ -37,9 +40,6 @@ public class Maneuver {
 
     @Override
     public String toString() {
-        return "Maneuver{" +
-                "position=" + position +
-                ", orientation=" + orientation +
-                '}';
+        return position.getX() + " " + position.getY() + " " + orientation.name();
     }
 }
