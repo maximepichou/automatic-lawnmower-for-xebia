@@ -1,15 +1,35 @@
 package fr.maxime.main;
 
 import fr.maxime.lawnmower.Lawn;
-import fr.maxime.lawnmower.Maneuver;
-import fr.maxime.reader.LawnFileReader;
+import fr.maxime.lawnmower.motioncontrol.Maneuver;
+import fr.maxime.lawnreader.LawnFileReader;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
+import java.io.FileNotFoundException;
 import java.util.List;
 
+
 public class Main {
+    private static final Logger log = LoggerFactory.getLogger(Main.class);
+
     public static void main(String[] args) {
-        Lawn lawn = LawnFileReader.read(args[0]);
+        if(args.length < 1){
+            log.error("Usage : application.jar <input_file_path>");
+            System.exit(1);
+        }
+
+
+        Lawn lawn = null;
+        try {
+            lawn = LawnFileReader.read(args[0]);
+        } catch (FileNotFoundException e) {
+            log.error("The file has not been found");
+            System.exit(2);
+        }
+
         List<Maneuver> maneuvers = lawn.performFinalPositionOfControllableMower();
-        maneuvers.forEach(System.out::println);
+        maneuvers.forEach(maneuver -> log.info(maneuver.toString()));
     }
+
 }
