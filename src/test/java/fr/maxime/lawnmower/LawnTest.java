@@ -15,6 +15,7 @@ import static org.junit.Assert.assertEquals;
 
 public class LawnTest {
 
+    // Please see the associate image example1.png (in resources/img_for_test_example folder) to understand this test
     @Test
     public void example1Test(){
         // Given
@@ -47,9 +48,10 @@ public class LawnTest {
         assertEquals(expectedManeuverList, maneuverList);
     }
 
+
+    // Please see the associate image example2.png (in resources/img_for_test_example folder) to understand this test
     @Test
     public void example2Test(){
-
         // Given
         Lawn lawn = Lawn.builder().withMaxX(5).withMaxY(5)
                 .withControllableMower()
@@ -80,9 +82,10 @@ public class LawnTest {
         assertEquals(expectedManeuverList, maneuverList);
     }
 
+
+    // Please see the associate image example3.png (in resources/img_for_test_example folder) to understand this test
     @Test
     public void example3Test(){
-
         // Given
         Lawn lawn = Lawn.builder()
                 .withMaxX(3).withMaxY(3)
@@ -125,7 +128,42 @@ public class LawnTest {
     }
 
 
+    // Please see the associate image example4.png (in resources/img_for_test_example folder) to understand this test
+    @Test
+    public void example4Test(){
+        // Given
+        Lawn lawn = Lawn.builder()
+                .withMaxX(3).withMaxY(3)
+                .withControllableMower()
+                .withInitialOrientation(Orientation.N)
+                .withInitialPosition().x(3).y(0).done()
+                .withMotionController().withMotionControl(Movement.A).done()
+                .withMotionController().withMotionControl(Movement.A).done()
+                .withMotionController().withMotionControl(Movement.A).done()
+                .withMotionController().withMotionControl(Movement.A).done()
+                .withMotionController().withMotionControl(Rotation.G).done()
+                .withMotionController().withMotionControl(Movement.A).done()
+                .withMotionController().withMotionControl(Movement.A).done()
+                .withMotionController().withMotionControl(Movement.A).done()
+                .withMotionController().withMotionControl(Movement.A).done()
+                .withMotionController().withMotionControl(Rotation.G).done()
+                .withMotionController().withMotionControl(Movement.A).done()
+                .withMotionController().withMotionControl(Movement.A).done()
+                .withMotionController().withMotionControl(Movement.A).done()
+                .withMotionController().withMotionControl(Movement.A).done()
+                .done()
+                .build();
 
+        // Execute
+        List<Maneuver> maneuverList = lawn.performFinalPositionOfControllableMower();
+
+
+        // Verify
+        List<Maneuver> expectedManeuverList = new ArrayList<>();
+        expectedManeuverList.add(new Maneuver(new Position(0, 0), Orientation.S));
+
+        assertEquals(expectedManeuverList, maneuverList);
+    }
 }
 
 
