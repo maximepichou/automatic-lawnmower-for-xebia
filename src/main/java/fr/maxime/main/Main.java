@@ -1,5 +1,6 @@
 package fr.maxime.main;
 
+import fr.maxime.lawnmower.service.LawnService;
 import fr.maxime.lawnmower.Lawn;
 import fr.maxime.lawnmower.motioncontrol.Maneuver;
 import fr.maxime.lawnreader.LawnFileReader;
@@ -19,7 +20,6 @@ public class Main {
             System.exit(1);
         }
 
-
         Lawn lawn = null;
         try {
             lawn = LawnFileReader.read(args[0]);
@@ -28,7 +28,8 @@ public class Main {
             System.exit(2);
         }
 
-        List<Maneuver> maneuvers = lawn.performFinalPositionOfControllableMower();
+        LawnService lawnService = new LawnService(lawn);
+        List<Maneuver> maneuvers = lawnService.moveMowersAndGetFinalPosition();
         maneuvers.forEach(maneuver -> log.info(maneuver.toString()));
     }
 

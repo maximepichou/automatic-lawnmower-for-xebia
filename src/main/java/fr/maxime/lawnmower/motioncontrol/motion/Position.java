@@ -5,8 +5,8 @@ import fr.maxime.lawnmower.ControllableMower;
 import java.util.function.Consumer;
 
 public class Position {
-    private int x;
-    private int y;
+    private int x = 0;
+    private int y = 0;
 
     private Position(){}
 

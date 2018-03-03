@@ -1,6 +1,7 @@
 package fr.maxime.lawnmower;
 
 
+import fr.maxime.lawnmower.service.LawnService;
 import fr.maxime.lawnmower.motioncontrol.*;
 import fr.maxime.lawnmower.motioncontrol.motion.Movement;
 import fr.maxime.lawnmower.motioncontrol.motion.Orientation;
@@ -38,7 +39,8 @@ public class LawnTest {
 
 
         // Execute
-        List<Maneuver> maneuverList = lawn.performFinalPositionOfControllableMower();
+        LawnService lawnService = new LawnService(lawn);
+        List<Maneuver> maneuverList = lawnService.moveMowersAndGetFinalPosition();
 
 
         // Verify
@@ -72,7 +74,8 @@ public class LawnTest {
 
 
         // Execute
-        List<Maneuver> maneuverList = lawn.performFinalPositionOfControllableMower();
+        LawnService lawnService = new LawnService(lawn);
+        List<Maneuver> maneuverList = lawnService.moveMowersAndGetFinalPosition();
 
 
         // Verify
@@ -117,7 +120,8 @@ public class LawnTest {
                 .build();
 
         // Execute
-        List<Maneuver> maneuverList = lawn.performFinalPositionOfControllableMower();
+        LawnService lawnService = new LawnService(lawn);
+        List<Maneuver> maneuverList = lawnService.moveMowersAndGetFinalPosition();
 
 
         // Verify
@@ -155,7 +159,8 @@ public class LawnTest {
                 .build();
 
         // Execute
-        List<Maneuver> maneuverList = lawn.performFinalPositionOfControllableMower();
+        LawnService lawnService = new LawnService(lawn);
+        List<Maneuver> maneuverList = lawnService.moveMowersAndGetFinalPosition();
 
 
         // Verify

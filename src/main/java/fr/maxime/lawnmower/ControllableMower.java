@@ -1,6 +1,5 @@
 package fr.maxime.lawnmower;
 
-import fr.maxime.lawnmower.motioncontrol.Maneuver;
 import fr.maxime.lawnmower.motioncontrol.MotionController;
 import fr.maxime.lawnmower.motioncontrol.motion.Orientation;
 import fr.maxime.lawnmower.motioncontrol.motion.Position;
@@ -20,19 +19,6 @@ public class ControllableMower {
 
     public static ControllableMower.Builder builder(){
         return new ControllableMower.Builder();
-    }
-
-    public Maneuver performMotionControls(Lawn lawn){
-        Orientation currentOrientation = initialOrientation;
-        Position currentPosition = initialPosition;
-        for(MotionController motionController : motionControls){
-            Maneuver maneuverToUpdate = motionController.getMotionControlCalculator().perform(currentOrientation, currentPosition, motionController.getMotionControl());
-            if(lawn.isValidManeuver(maneuverToUpdate)){
-                currentOrientation = maneuverToUpdate.getOrientation();
-                currentPosition = maneuverToUpdate.getPosition();
-            }
-        }
-        return new Maneuver(currentPosition, currentOrientation);
     }
 
     public Position getInitialPosition() {
@@ -116,7 +102,12 @@ public class ControllableMower {
         }
 
         public ControllableMower build(){
-            return managedInstance;
+            if(managedInstance.initialOrientation != null && managedInstance.initialPosition != null) {
+                return managedInstance;
+            }
+            else{
+                throw new IllegalArgumentException("Can't construct ControllableMower without both initialOrientation and initialPosition");
+            }
         }
     }
 }

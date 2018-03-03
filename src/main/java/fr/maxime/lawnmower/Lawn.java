@@ -42,14 +42,6 @@ public class Lawn {
                 && maneuver.getPosition().getY() >= 0 && maneuver.getPosition().getY() <= maxY;
     }
 
-    public List<Maneuver> performFinalPositionOfControllableMower(){
-        List<Maneuver> maneuverList = new ArrayList<>();
-        for(ControllableMower controllableMower1 : controllableMowers){
-            Maneuver finalManeuver = controllableMower1.performMotionControls(this);
-            maneuverList.add(finalManeuver);
-        }
-        return maneuverList;
-    }
 
     @Override
     public boolean equals(Object o) {
@@ -104,7 +96,12 @@ public class Lawn {
         }
 
         public Lawn build(){
-            return managedInstance;
+            if(managedInstance.maxX > 0 && managedInstance.maxY > 0 ) {
+                return managedInstance;
+            }
+            else{
+                throw new IllegalArgumentException("Lawn must have positive coordinates");
+            }
         }
     }
 }
