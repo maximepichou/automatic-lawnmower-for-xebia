@@ -19,6 +19,12 @@ public class LawnFileReader {
     private LawnFileReader() {
     }
 
+    /**
+     * Read a file, construct a lawn and return it.
+     * @param filePath the file path where there is the instruction to construct a Lawn.
+     * @return a Lawn instance based on the file.
+     * @throws FileNotFoundException if the file has been found.
+     */
     public static Lawn read(String filePath) throws FileNotFoundException{
         Lawn lawn;
         try(Scanner in = new Scanner(new FileReader(filePath))) {
@@ -30,6 +36,11 @@ public class LawnFileReader {
         return lawn;
     }
 
+    /**
+     * Construct the first part of the lawn
+     * @param in the scanner of the file to construct
+     * @return an instance of the Lawn.Builder to continue the construction
+     */
     private static Lawn.Builder constructLawn(Scanner in) {
         int maxX = in.nextInt();
         int maxY = in.nextInt();
@@ -39,6 +50,12 @@ public class LawnFileReader {
         return Lawn.builder().withMaxX(maxX).withMaxY(maxY);
     }
 
+    /**
+     * Construct the list of all mowers.
+     * @param in the scanner of the file to construct.
+     * @param lawnBuilder the instance of a Lawn.Builder where to put the list of mowers
+     * @return an instance of a Lawn.Builder to continue the construction.
+     */
     private static Lawn.Builder constructControllableMowers(Scanner in, Lawn.Builder lawnBuilder) {
         while(in.hasNextLine()){
             int initialX = in.nextInt();
@@ -56,6 +73,11 @@ public class LawnFileReader {
         return lawnBuilder;
     }
 
+    /**
+     * Construct a list of motion control in a builder.
+     * @param in the scanner of the file to construct.
+     * @param controllableMowerBuilder the Builder where to put the motion control list
+     */
     private static void constructMotionControllerList(Scanner in, ControllableMower.Builder controllableMowerBuilder) {
         if(in.hasNextLine()) {
             String motionControls = in.next();
@@ -67,6 +89,11 @@ public class LawnFileReader {
         }
     }
 
+    /**
+     * Construct one motion control based on the representation of a string
+     * @param controllableMowerBuilder the Builder where to put this motion control
+     * @param motionControlString the representation of the motion control in string
+     */
     private static void constructMotionControl(ControllableMower.Builder controllableMowerBuilder, String motionControlString) {
         MotionControl motionControl;
 

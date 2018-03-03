@@ -18,11 +18,18 @@ public class PositionCalculator implements MotionControlCalculator {
         return instance;
     }
 
+    /**
+     * Move the mower based on the current position and the motion to perform.
+     * @param currentOrientation the current orientation of the mower.
+     * @param currentPosition the current position of the mower.
+     * @param motionToPerform the motion control to perform on the mower. (Must be a movement)
+     * @return the position of the mower after the motion has been applied on it.
+     */
     @Override
     public Maneuver perform(Orientation currentOrientation, Position currentPosition, MotionControl motionToPerform){
         Movement movementToPerform = (Movement) motionToPerform;
-        int newX = currentPosition.getX() + currentOrientation.getShiftX() * movementToPerform.getMultiplierX();
-        int newY = currentPosition.getY() + currentOrientation.getShiftY() * movementToPerform.getMultiplierY();
+        int newX = currentPosition.getX() + (currentOrientation.getShiftX() * movementToPerform.getMultiplierX());
+        int newY = currentPosition.getY() + (currentOrientation.getShiftY() * movementToPerform.getMultiplierY());
 
         return new Maneuver(new Position(newX, newY), currentOrientation);
     }

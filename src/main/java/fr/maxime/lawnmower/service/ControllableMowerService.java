@@ -12,7 +12,13 @@ public class ControllableMowerService {
     private ControllableMowerService() {
     }
 
-    public static Maneuver performMotionControls(ControllableMower controllableMower, Lawn lawn){
+    /**
+     * Move a mower on a lawn with a predefined motion control list.
+     * @param controllableMower the mower to move.
+     * @param lawn the lawn where the mower is.
+     * @return the final position of the mower after all motion has been applied.
+     */
+    protected static Maneuver performMotionControls(ControllableMower controllableMower, Lawn lawn){
         Orientation currentOrientation = controllableMower.getInitialOrientation();
         Position currentPosition = controllableMower.getInitialPosition();
         for(MotionController motionController : controllableMower.getMotionControls()){

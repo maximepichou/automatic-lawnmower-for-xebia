@@ -14,6 +14,10 @@ public class LawnService {
         this.lawn = lawn;
     }
 
+    /**
+     * Move all mowers on the current lawn and return the final position of all mowers on that lawn.
+     * @return the final position of all mowers with their orientation.
+     */
     public List<Maneuver> moveMowersAndGetFinalPosition(){
         List<Maneuver> maneuverList = new ArrayList<>();
         for(ControllableMower controllableMower : lawn.getControllableMowers()){

@@ -1,4 +1,4 @@
-package fr.maxime.main;
+package fr.maxime;
 
 import fr.maxime.lawnmower.service.LawnService;
 import fr.maxime.lawnmower.Lawn;

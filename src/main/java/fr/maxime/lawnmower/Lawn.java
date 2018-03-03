@@ -15,12 +15,6 @@ public class Lawn {
         controllableMowers = new ArrayList<>();
     }
 
-    public Lawn(int maxX, int maxY, List<ControllableMower> controllableMowers) {
-        this.maxX = maxX;
-        this.maxY = maxY;
-        this.controllableMowers = controllableMowers;
-    }
-
     public static Lawn.Builder builder(){
         return new Lawn.Builder();
     }
@@ -37,6 +31,11 @@ public class Lawn {
         return controllableMowers;
     }
 
+    /**
+     * Check if the maneuver is on the lawn.
+     * @param maneuver the maneuver to check
+     * @return Return true if the maneuver is on the lawn, false otherwise.
+     */
     public boolean isValidManeuver(Maneuver maneuver){
         return maneuver.getPosition().getX() >= 0 && maneuver.getPosition().getX() <= maxX
                 && maneuver.getPosition().getY() >= 0 && maneuver.getPosition().getY() <= maxY;
